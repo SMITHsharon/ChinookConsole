@@ -14,7 +14,7 @@ namespace ChinookConsoleApp
             Console.WriteLine("Enter last name:");
             var y = Console.ReadLine();
 
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Chinook"].ConnectionString))
+            using (var connection = new SqlConnection("Server = (local)\\SqlExpress; Database=chinook;Trusted_Connection=True;"))
             {
                 var employeeAdd = connection.CreateCommand();
                 employeeAdd.CommandText = "Insert into Employee(FirstName, LastName) " +

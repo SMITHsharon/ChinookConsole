@@ -10,7 +10,7 @@ namespace ChinookConsoleApp
         {
             Console.Clear();
 
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Chinook"].ConnectionString))
+            using (var connection = new SqlConnection("Server = (local)\\SqlExpress; Database=chinook;Trusted_Connection=True;"))
             {
                 var employeeListCommand = connection.CreateCommand();
 
