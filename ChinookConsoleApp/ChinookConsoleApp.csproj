@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddEmployee.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="DeleteEmployee.cs" />
     <Compile Include="ListEmployees.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

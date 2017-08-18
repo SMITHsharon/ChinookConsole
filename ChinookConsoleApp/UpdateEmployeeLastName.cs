@@ -9,39 +9,11 @@ namespace ChinookConsoleApp
     {
         public void Update()
         {
+            Console.WriteLine();
             Console.Write("Enter ID of Employee for name change: ");
             var empID = Convert.ToInt32(Console.ReadLine());
-            var empNewLastName = "null";
 
-            using (var connection = new SqlConnection("Server = (local)\\SqlExpress; Database=chinook;Trusted_Connection=True;"))
-            {
-                var listThisEmpCommand = connection.CreateCommand();
-                listThisEmpCommand.CommandText = "select FirstName + ' ' + LastName as fullname " +
-                                                  "from Employee " +
-                                                  "where EmployeeId = @selectedID ";
-
-                var employeeIDParameter = listThisEmpCommand.Parameters.Add("@selectedID", SqlDbType.Int);
-                employeeIDParameter.Value = empID;
-
-                try
-                {
-                    connection.Open();
-                    var reader = listThisEmpCommand.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        Console.Write($"Change {reader["fullname"]}'s last name to: ");
-                    }
-                    empNewLastName = Console.ReadLine();
-
-                    Console.WriteLine("Press <enter> to return to the menu.");
-                    Console.ReadLine();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("ex.Message");
-                    Console.WriteLine(ex.StackTrace);
-                }
-            }
+            var empNewLastName = ListEmployees.ListSelectEmployee ("update", empID);
 
             if (empNewLastName != "null")
             {
