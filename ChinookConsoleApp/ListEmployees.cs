@@ -28,7 +28,7 @@ namespace ChinookConsoleApp
                         Console.WriteLine($"{reader["Id"]}.) {reader["FullName"]}");
                     }
 
-                    Console.WriteLine("Press enter to return to the menu.");
+                    Console.WriteLine("Press <enter> to return to the menu.");
                     Console.ReadLine();
                 }
                 catch (Exception ex)

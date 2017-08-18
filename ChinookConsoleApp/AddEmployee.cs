@@ -9,9 +9,10 @@ namespace ChinookConsoleApp
     {
         public void Add()
         {
-            Console.WriteLine("Enter first name:");
+            Console.Clear();
+            Console.Write("Enter first name:  ");
             var x = Console.ReadLine();
-            Console.WriteLine("Enter last name:");
+            Console.Write("Enter last name:  ");
             var y = Console.ReadLine();
 
             using (var connection = new SqlConnection("Server = (local)\\SqlExpress; Database=chinook;Trusted_Connection=True;"))
@@ -39,7 +40,7 @@ namespace ChinookConsoleApp
                 }
 
 
-                Console.WriteLine("Press enter to return to the menu.");
+                Console.WriteLine("Press <enter> to return to the menu.");
                 Console.ReadLine();
             }
         }
