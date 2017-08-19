@@ -28,7 +28,7 @@ namespace ChinookConsoleApp
                 selection = Convert.ToInt32(Console.ReadLine());
 
 
-                if (selection == 1) new ListEmployees().ListAll("Press enter to return to the main menu");
+                if (selection == 1) new ListEmployees().ListAll("Press <enter> to return to the main menu ");
                 if (selection == 2) new AddEmployee().Add();
                 if (selection == 3) new UpdateEmployeeLastName().Update();
                 if (selection == 4) new DeleteEmployee().Delete();

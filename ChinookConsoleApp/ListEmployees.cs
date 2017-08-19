@@ -47,7 +47,8 @@ namespace ChinookConsoleApp
                     Console.WriteLine($"{employee.Id}.) {employee.FullName}");
                     }
 
-                    Console.WriteLine(prompt);
+                    Console.WriteLine();
+                    Console.Write(prompt);
                     return int.Parse(Console.ReadLine());
                 }
                 catch (Exception ex)
