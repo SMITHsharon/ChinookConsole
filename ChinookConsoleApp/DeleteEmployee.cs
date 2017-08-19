@@ -10,29 +10,45 @@ namespace ChinookConsoleApp
         public void Delete()
         {
             {
-                Console.WriteLine();
-                Console.Write("Enter ID of Employee to delete: ");
-                var empID = Convert.ToInt32(Console.ReadLine());
+                var employeeList = new ListEmployees();
+                var firedEmployee = employeeList.ListAll("Choose an employee to transition: ");
 
-                var empNewLastName = ListEmployees.ListSelectEmployee("delete", empID);
+                
+                //Console.WriteLine();
+                //Console.Write("Enter ID of Employee to delete: ");
+                //var empID = Convert.ToInt32(Console.ReadLine());
 
-                if (empNewLastName != "null")
-                {
-                    using (var connection = new SqlConnection("Server = (local)\\SqlExpress; Database=chinook;Trusted_Connection=True;"))
+                //var confirmedDelete = ListEmployees.ListSelectEmployee("delete", empID);
+
+                //if (confirmedDelete == "Y" || confirmedDelete == "y")
+                //{
+                    using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["chinook"].ConnectionString))
                     {
-                        var deleteEmployee = connection.CreateCommand();
-                        deleteEmployee.CommandText = "delete Employee " +
-                                                     "where EmployeeId = @selectedID ";
+                        connection.Open();
+                        var cmd = connection.CreateCommand();
+                        cmd.CommandText = "delete from Employee where EmployeeId = @employeeID";
 
-                        var employeeIDParameter = deleteEmployee.Parameters.Add("@selectedID", SqlDbType.Int);
-                        employeeIDParameter.Value = empID;
+                        var employeeIDParameter = cmd.Parameters.Add("@employeeID", SqlDbType.Int);
+                        employeeIDParameter.Value = firedEmployee;
 
                         try
                         {
-                            connection.Open();
+                            //connection.Open();
 
-                            var rowsAffected = deleteEmployee.ExecuteNonQuery();
-                            Console.WriteLine(rowsAffected != 1 ? "Delete Failed" : "Success!");
+                            var recordsDeleted = cmd.ExecuteNonQuery();
+
+                        if (recordsDeleted == 1)
+                        {
+                            Console.WriteLine("Success");
+                        }
+                        else if (recordsDeleted > 1)
+                        {
+                            Console.WriteLine("AAAAHHHHHHHH!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Failed to find a matching ID");
+                        }
 
                             Console.WriteLine("Press <enter> to return to the menu.");
                             Console.ReadLine();
@@ -42,7 +58,7 @@ namespace ChinookConsoleApp
                             Console.WriteLine("ex.Message");
                             Console.WriteLine(ex.StackTrace);
                         }
-                    }
+                    //}
                 }
             }
         }

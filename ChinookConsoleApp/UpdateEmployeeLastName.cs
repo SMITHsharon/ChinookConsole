@@ -17,12 +17,12 @@ namespace ChinookConsoleApp
 
             if (empNewLastName != "null")
             {
-                using (var connection = new SqlConnection("Server = (local)\\SqlExpress; Database=chinook;Trusted_Connection=True;"))
+                using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["chinook"].ConnectionString))
                 {
                     var updateEmployeeName = connection.CreateCommand();
                     updateEmployeeName.CommandText = "update Employee " +
                                                      "set LastName = @changedLastName " +
-                                                     "where EmployeeId = @selectedID ";
+                                                     "where EmployeeId = @selectedID";
 
                     var employeeIDParameter = updateEmployeeName.Parameters.Add("@selectedID", SqlDbType.Int);
                     employeeIDParameter.Value = empID;

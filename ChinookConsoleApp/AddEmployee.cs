@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using Dapper;
 
 namespace ChinookConsoleApp
 {
@@ -16,22 +17,26 @@ namespace ChinookConsoleApp
             Console.Write("Enter last name:  ");
             var y = Console.ReadLine();
 
-            using (var connection = new SqlConnection("Server = (local)\\SqlExpress; Database=chinook;Trusted_Connection=True;"))
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["chinook"].ConnectionString))
             {
                 var employeeAdd = connection.CreateCommand();
-                employeeAdd.CommandText = "Insert into Employee(FirstName, LastName) " +
-                                          "Values(@firstName, @lastName)";
+                //employeeAdd.CommandText = "Insert into Employee(FirstName, LastName) " +
+                //                          "Values(@firstName, @lastName)";
 
-                var firstNameParameter = employeeAdd.Parameters.Add("@firstName", SqlDbType.VarChar);
-                firstNameParameter.Value = x;
+                //var firstNameParameter = employeeAdd.Parameters.Add("@firstName", SqlDbType.VarChar);
+                //firstNameParameter.Value = x;
 
-                var lastNameParameter = employeeAdd.Parameters.Add("@lastName", SqlDbType.VarChar);
-                lastNameParameter.Value = y;
+                //var lastNameParameter = employeeAdd.Parameters.Add("@lastName", SqlDbType.VarChar);
+                //lastNameParameter.Value = y;
 
                 try
                 {
                     connection.Open();
-                    var rowsAffected = employeeAdd.ExecuteNonQuery();
+
+                    var rowsAffected = connection.Execute("Insert into Employee(FirstName, LastName) " +
+                                       "Values(@firstName, @lastName)", new { FirstName = x, LastName = y });
+
+                    //var rowsAffected = employeeAdd.ExecuteNonQuery();
                     Console.WriteLine(rowsAffected != 1 ? "Add Failed" : "Success!");
                 }
                 catch (Exception ex)
