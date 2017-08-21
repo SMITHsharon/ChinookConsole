@@ -44,7 +44,7 @@ namespace ChinookConsoleApp
 
                     foreach (var employee in result)
                     {
-                    Console.WriteLine($"{employee.Id}.) {employee.FullName}");
+                        Console.WriteLine($"{employee.Id}.) {employee.FullName}");
                     }
 
                     Console.WriteLine();
