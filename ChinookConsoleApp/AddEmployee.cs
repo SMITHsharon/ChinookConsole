@@ -46,7 +46,6 @@ namespace ChinookConsoleApp
                     Console.WriteLine(ex.StackTrace);
                 }
 
-
                 Console.WriteLine("Press <enter> to return to the menu");
                 Console.ReadLine();
             }

@@ -38,7 +38,7 @@ namespace ChinookConsoleApp
                                      "e.FirstName + ' ' + e.LastName as FullName, " +
                                      "sum(i.Total) as TotalSales " +
                                      "from Employee as e " +
-                                     "join Customer as c on e.EmployeeId = c.CustomerId " +
+                                     "join Customer as c on e.EmployeeId = c.SupportRepId " +
                                      "join Invoice as i on i.CustomerId = c.CustomerId " +
                                      "where year(i.InvoiceDate) = @selectedYear " +
                                      "group by e.LastName, e.FirstName",
@@ -54,6 +54,10 @@ namespace ChinookConsoleApp
                     Console.Write(ex.Message);
                     Console.ReadLine();
                 }
+
+                Console.WriteLine();
+                Console.WriteLine("Press <enter> to return to the menu");
+                Console.ReadLine();
             }
         }
     }
