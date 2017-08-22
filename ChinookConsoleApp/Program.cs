@@ -33,7 +33,7 @@ namespace ChinookConsoleApp
                 if (selection == 2) new AddEmployee().Add();
                 if (selection == 3) new UpdateEmployeeLastName().Update();
                 if (selection == 4) new DeleteEmployee().Delete();
-                if (selection == 5) new ListEmployeeSales().ListSales();
+                if (selection == 5) new ListEmployeeSales().GetSalesYears();
                 //if (selection == 9) break;
 
             }
