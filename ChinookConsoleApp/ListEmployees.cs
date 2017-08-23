@@ -38,16 +38,18 @@ namespace ChinookConsoleApp
                 //    Console.WriteLine($"{reader["Id"]}.) {reader["FullName"]}");
                 //}
 
-                    var result = connection.Query<EmployeeListResult>("select employeeid as Id, " +
-                                                  "firstname + ' ' + lastname as fullname " +
-                                                  "from Employee");
+                    var result = connection.Query<EmployeeListResult>
+                                     ("select employeeid as Id, " +
+                                      "firstname + ' ' + lastname as fullname " +
+                                      "from Employee");
 
                     foreach (var employee in result)
                     {
-                    Console.WriteLine($"{employee.Id}.) {employee.FullName}");
+                        Console.WriteLine($"{employee.Id}.) {employee.FullName}");
                     }
 
-                    Console.WriteLine(prompt);
+                    Console.WriteLine();
+                    Console.Write(prompt);
                     return int.Parse(Console.ReadLine());
                 }
                 catch (Exception ex)

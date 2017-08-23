@@ -10,7 +10,7 @@ namespace ChinookConsoleApp
     {
         static void Main(string[] args)
         {
-            var options = 4;
+            var options = 5;
             var selection = -1;
             while (selection <= options)
             {
@@ -22,16 +22,18 @@ namespace ChinookConsoleApp
                 Console.WriteLine("2. Add an Employee");
                 Console.WriteLine("3. Update Employee Last Name");
                 Console.WriteLine("4. Delete Employee");
+                Console.WriteLine("5. List Employee Sales");
                 Console.WriteLine("9. Exit");
                 Console.WriteLine("");
                 Console.Write(">");
                 selection = Convert.ToInt32(Console.ReadLine());
 
 
-                if (selection == 1) new ListEmployees().ListAll("Press enter to return to the main menu");
+                if (selection == 1) new ListEmployees().ListAll("Press <enter> to return to the main menu ");
                 if (selection == 2) new AddEmployee().Add();
                 if (selection == 3) new UpdateEmployeeLastName().Update();
                 if (selection == 4) new DeleteEmployee().Delete();
+                if (selection == 5) new ListEmployeeSales().GetSalesYears();
                 //if (selection == 9) break;
 
             }
