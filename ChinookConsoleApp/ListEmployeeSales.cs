@@ -10,12 +10,6 @@ using Dapper;
 
 namespace ChinookConsoleApp
 {
-    //public class SalesYearsResult
-    //{
-    //    public DateTime Year { get; set; }
-    //    public float TotalSales { get; set; }
-    //}
-
     public class EmployeeSalesListResult
     {
         public string FullName { get; set; }
@@ -25,7 +19,6 @@ namespace ChinookConsoleApp
 
     public class ListEmployeeSales
     {
-
         public void GetSalesYears()
         {
             Console.Clear();
@@ -51,6 +44,7 @@ namespace ChinookConsoleApp
                     Console.WriteLine();
                     Console.Write("Enter the year for which you want to list sales: ");
                     var selectYear = true;
+                    var calledListSales = false;
                     while (selectYear)
                     {
                         int userChoice = int.Parse(Console.ReadLine());
@@ -59,15 +53,16 @@ namespace ChinookConsoleApp
                             if (userChoice == year)
                             {
                                 Console.WriteLine();
-                                ListSales(userChoice);
                                 selectYear = false;
+                                calledListSales = true;
+                                ListSales(userChoice);
                             }
-                            else
-                            {
-                                Console.WriteLine("There are not sales for the indicated year.");
-                                Console.Write("Enter the year for which you want to list sales: ");
-                                // add a way for user to quit
-                            }
+                        }
+
+                        if (!calledListSales)
+                        {
+                            Console.WriteLine("There are not sales for the indicated year.");
+                            Console.Write("Enter the year for which you want to list sales: ");
                         }
                     }
 
@@ -77,21 +72,13 @@ namespace ChinookConsoleApp
                     Console.Write(ex.Message);
                     Console.ReadLine();
                 }
-
-                //Console.WriteLine();
-                //Console.WriteLine("Press <enter> to return to the menu");
-                //Console.ReadLine();
             }
         }
     
 
         public void ListSales(int yearX)
         {
-            //Console.Clear();
             Console.WriteLine();
-
-            //Console.Write("List employee sales for which year: ");
-            //var yearX = Console.ReadLine();
 
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["chinook"].ConnectionString))
             {
@@ -114,6 +101,7 @@ namespace ChinookConsoleApp
                     {
                         Console.WriteLine($"{employee.FullName}: {employee.TotalSales}");
                     }
+
                 }
                 catch (Exception ex)
                 {
